@@ -1,3 +1,3 @@
 # CASA-Track
-## Ethan Zimbelman
+## Elena Fowler
 A form tracking Django application for CASA of San Luis Obispo.

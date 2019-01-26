@@ -75,7 +75,7 @@ button.track-button {
     right: 2vw;
 }
     
-div.under-nav {
+div.nav-bottom {
     height: 6vh;
     width: 100vw;
     background-image: linear-gradient(to right, var(--blue-but), rgb(218, 236, 246));

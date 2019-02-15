@@ -1,29 +1,94 @@
 {% extends 'track/base.html' %}{% load static %} {% block pageContent %}
-<h1>Tracking Form</h1>
-<h3>Supervisor</h3>
-<input type="text"></input>
-<h3>Child's Name</h3>
-<input type="text"></input>
-<h3>Month, Year</h3>
+<div class="section">
+   <div class="container">
+      <div class="row">
+         <a class="btn btn-info" href="/">
+            <i class="material-icons">arrow_back</i> Go Back
+         </a>
+      </div>
+      <h2 class="h2-home">Tracking Form</h2>
+      <br>
+      <form method="POST" action='/tracking/' class="post-form">
+         {% csrf_token %}
+         <div class="col-12">
+            <div class="form-group">
+               <h3 class="label-control">Supervisor</h3>
+               <select name='sv_type' class="form-control" id="exampleFormControlSelect1">
+                  <option value='C'>Celena</option>
+                  <option value='H'>Heidi</option>
+                  <option value='G'>Gail</option>
+                  <option value='K'>Katie</option>
+                  <option value='P'>Pete</option>
+                  <option value='M'>Melanie</option>
+                  <option value='N'>Nicole</option>
+               </select>
+            </div>
+         </div>
+         <div class="col-12">
+            <div class="form-group">
+               <h3 class="label-control">Child's Name</h3>
+               <input name='child_name' type="text" class="form-control" value="">
+            </div>
+         </div>
+         <div class="col-12">
+            <div class="form-group">
+               <h3 class="label-control">Month, Year</h3>
+               <input name='' type="text" class="form-control datetimepicker" id='month_year' required=''>
+            </div>
+         </div>
+         <div class="col-12">
+            <div class="form-group">
+               <h3 class="label-control"></h3>
+               <input name='' type="text" class="form-control" value="">
+            </div>
+         </div>
+         <div class="col-12">
+            <div class="form-group">
+               <h3 class="label-control"></h3>
+               <input name='' type="text" class="form-control" value="">
+            </div>
+         </div>
 
-<h3>How many hours did you spend with your CASA child/ren this month?</h3>
-<input type="text"></input>
-<h3>How many hours did you spend on this child/ren's education this month?</h3>
-<input type="text"></input>
-<h3>How many additional hours did you spend on your case this month?</h3>
-<input type="text"></input>
+         <h3>How many hours did you spend with your CASA child/ren this month?</h3>
+         <input type="text"></input>
+         <h3>How many hours did you spend on this child/ren's education this month?</h3>
+         <input type="text"></input>
+         <h3>How many additional hours did you spend on your case this month?</h3>
+         <input type="text"></input>
 
-<h3>What continuing education did you do this month?</h3>
-<input type="text"></input>
-<h3>How many miles did you drive for CASA activities this month?</h3>
-<input type="text"></input>
-<h3>Did you have a face-to-face meeting with your Advocate Supervisor this month? (State in hours)</h3>
-<input type="text"></input>
-<h3>Did you have phone or email contact with your Advocate Supervisor this month?</h3>
-<input type="text"></input>
+         <h3>What continuing education did you do this month?</h3>
+         <input type="text"></input>
+         <h3>How many miles did you drive for CASA activities this month?</h3>
+         <input type="text"></input>
+         <h3>Did you have a face-to-face meeting with your Advocate Supervisor this month? (State in hours)</h3>
+         <input type="text"></input>
+         <h3>Did you have phone or email contact with your Advocate Supervisor this month?</h3>
+         <input type="text"></input>
 
-<h3>Other volunteering for CASA this month?</h3>
-<input type="text"></input>
-<h3>What other volunteering did you do this month besides CASA?</h3>
-<input type="text"></input>
-{% endblock pageContent %}
+         <h3>Other volunteering for CASA this month?</h3>
+         <input type="text"></input>
+         <h3>What other volunteering did you do this month besides CASA?</h3>
+         <input type="text"></input>
+         <br>
+         <div class="section">
+            <div class="col-12">
+               <button class="btn btn-success" type="submit">
+                  <i class="material-icons">done</i> Submit
+               </button>
+            </div>
+         </div>
+      </form>
+   </div>
+</div>
+{% endblock pageContent %} {% block pageScripts %}
+<script src="{% static 'timeoff/js/plugins/bootstrap-datetimepicker.js' %}" type="text/javascript"></script>
+<script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.1.3/dist/bootstrap-validate.js" ></script>
+<script>
+    $(document).ready(function () {
+        //init DateTimePickers
+        materialKit.initFormExtendedDatetimepickers();
+    });
+
+</script>
+
+{% endblock pageScripts %}

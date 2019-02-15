@@ -10,7 +10,8 @@
       <br>
       <form method="POST" action='/tracking/' class="post-form">
          {% csrf_token %}
-         <div class="col-12">
+         {{ form.as_p }}
+         <!-- <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">Supervisor</h3>
                <select name='sv_type' class="form-control" id="exampleFormControlSelect1">
@@ -76,7 +77,7 @@
                   <i class="material-icons">done</i> Submit
                </button>
             </div>
-         </div>
+         </div> -->
       </form>
    </div>
 </div>

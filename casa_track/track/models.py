@@ -13,8 +13,8 @@ class TrackingForm(models.Model):
    NICOLE = 'N'
    SV_CHOICES = [
       (CELENA, 'Celena'),
-      (HEIDI, 'Vacation (paid)'),
-      (GAIL, 'Unpaid Leave'),
+      (HEIDI, 'Heidi'),
+      (GAIL, 'Gail'),
       (KATIE, 'Katie'),
       (PETE, 'Pete'),
       (MELANIE, 'Melanie'),

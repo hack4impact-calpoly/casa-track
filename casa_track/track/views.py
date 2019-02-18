@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import TrackingFormForm
+from .models import TrackingForm
 
 # Create your views here.
 def home(request):
@@ -9,10 +10,10 @@ def tracking(request):
    if request.method == "POST":
       form = TrackingFormForm(request.POST)
       if form.is_valid():
-         tf = form.save(commit=False)
-         tf.owner = request.user
-         tf.save()
+         form.save()
          return redirect('/')
+      else:
+         print(form.errors)
    else:
       form = TrackingFormForm()
    return render(request, 'track/tracking.html', {'form': form})

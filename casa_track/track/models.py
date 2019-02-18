@@ -13,8 +13,8 @@ class TrackingForm(models.Model):
    NICOLE = 'N'
    SV_CHOICES = [
       (CELENA, 'Celena'),
-      (HEIDI, 'Vacation (paid)'),
-      (GAIL, 'Unpaid Leave'),
+      (HEIDI, 'Heidi'),
+      (GAIL, 'Gail'),
       (KATIE, 'Katie'),
       (PETE, 'Pete'),
       (MELANIE, 'Melanie'),
@@ -23,18 +23,18 @@ class TrackingForm(models.Model):
    owner = models.ForeignKey(
       User, on_delete=models.CASCADE, blank=True, null=True)
    supervisor = models.CharField(
-      max_length=2, choices=SV_CHOICES, blank=False, null=False)
+      max_length=1, choices=SV_CHOICES, blank=False, null=False)
    child_name = models.CharField(max_length=256, blank=False)
-   month_year = models.DateTimeField(blank=False, null=False)
-   hours_spent = models.IntegerField(blank=False)
-   hours_education = models.IntegerField(blank=False)
-   hours_on_case = models.IntegerField(blank=False)
+   month = models.CharField(max_length=256, blank=False)
+   hours_spent = models.CharField(max_length=256, blank=False)
+   hours_education = models.CharField(max_length=256, blank=False)
+   hours_on_case = models.CharField(max_length=256, blank=False)
    continuing_edu = models.CharField(max_length=256, blank=False)
-   miles_driven = models.FloatField(blank=False)
-   face_advocate_sv_hours = models.IntegerField(blank=False)
+   miles_driven = models.CharField(max_length=256, blank=False)
+   face_advocate_sv_hours = models.CharField(max_length=256, blank=False)
    phone_advocate_sv = models.CharField(max_length=256, blank=False)
    other_volunteering = models.CharField(max_length=256, blank=False)
    objects = models.Manager()
 
    def __str__(self):
-      return "TrackingForm: %s" % self.owner
+      return self.child_name

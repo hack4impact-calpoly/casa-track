@@ -10,9 +10,10 @@ def tracking(request):
    if request.method == "POST":
       form = TrackingFormForm(request.POST)
       if form.is_valid():
-         tf = form.save(commit=False)
+         form.save()
          return redirect('/')
+      else:
+         print(form.errors)
    else:
       form = TrackingFormForm()
-      print("Here")
    return render(request, 'track/tracking.html', {'form': form})

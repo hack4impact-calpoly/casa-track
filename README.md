@@ -3,10 +3,12 @@ A form tracking Django application for CASA of San Luis Obispo.
 
 ## Project Purpose
 
-## Environnment
+## Environment
 
 ## Django Overview
-Follows the model view template frame work (MVT). Django takes care of controller hence no C (Controller)
+
+### The MVT Framework
+Django projects follow the Model View Template framework (MVT). It is very similar to the popular [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) framework, but has a couple key differences. The main difference is that Django itself handles interactions between the Models and Views, which is known to be the behavior of the Controller in the MVC framework. The 'Template' part of MVT refers to the HTML templates that you provide to Django that serve as the "UI" of the application, which can include Django Templating language (Jinja) that serve to transfer data from the View (in views.py) to the Template (HTML file).
 
 
 ### Models (models.py) https://docs.djangoproject.com/en/2.1/topics/db/models/

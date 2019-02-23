@@ -1,6 +1,33 @@
-#gCalendar {
-    width: 50%;
+.gCalendar {
+    width: 80%;
+    height: 600px;
     margin: 10vh auto;
     margin-left: auto;
     margin-right: auto;
+}
+
+@media screen and (max-width: 650px) {
+    .gMonth {
+        display: none;
+    }
+
+    .gAgenda {
+        display: inherit;
+    }
+}
+
+@media not screen and (max-width: 650px) {
+    .gMonth {
+        display: inherit;
+    }
+
+    .gAgenda {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 423px) {
+    .gAgenda {
+        margin-top: 20vh;
+    }
 }

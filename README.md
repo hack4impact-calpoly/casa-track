@@ -15,7 +15,7 @@ Django projects follow the Model View Template framework (MVT). It is very simil
 A model is the single, definitive source of information about your data. It contains the essential fields and behaviors of the data you’re storing. Generally, each model maps to a single database table.
 
 ### Views (views.py) https://docs.djangoproject.com/en/2.1/topics/http/views/
-a Python function that takes a Web request and returns a Web response. This response can be the HTML contents of a Web page, or a redirect, or a 404 error, or an XML document, or an image . . . or anything, really. 
+Views are Python functions that takes a Web request, along with any additional data, and returns a Web response. The returned web response can be created using logic passed into the function and can be the HTML contents of a page, a redirect, an error, or really anything. By convention, each URL has its own View function, mapped in by urls.py.
 
 ### Url Mapping (urls.py) https://www.tutorialspoint.com/django/django_url_mapping.htm
 When a user makes a request for a page on your web app, Django controller takes over to look for the corresponding view via the url.py file, and then return the HTML response or a 404 not found error, if not found. In url.py, the most important thing is the "urlpatterns" tuple. It’s where you define the mapping between URLs and views. 

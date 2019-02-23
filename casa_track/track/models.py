@@ -24,6 +24,7 @@ class TrackingForm(models.Model):
    ]
    owner = models.ForeignKey(
       User, on_delete=models.CASCADE, blank=True, null=True)
+   advocate = models.CharField(max_length=256, blank=False)
    supervisor = models.CharField(
       max_length=1, choices=SV_CHOICES, blank=False, null=False)
    child_name = models.CharField(max_length=256, blank=False)

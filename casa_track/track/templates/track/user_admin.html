@@ -1,0 +1,44 @@
+{% extends 'track/base.html' %} {% load static %}{% block pageHeader %}
+<link href="{% static 'track/css/track.css' %}" rel="stylesheet" /> {% endblock pageHeader %} {% block pageContent %}
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <h2 class="h2-home">Tracking Forms</h2>
+            <table class="table" id="table_id">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Child Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for t_form in t_forms %}
+                    <tr class="table-row">
+                        <td>{{ t_form.child_name }}</td>
+                        <td>
+                            <a href="javascript:void(0)" request-id='{{ t_form.id }}' class="btn btn-danger delete-btn">
+                                <i class="material-icons">delete</i> Delete
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% if admin %}
+        <div class="table-buttons">
+            <a class="btn" href="/tracking/" id='add-btn'>
+                <i class="material-icons">add</i> Add New Tracking Form
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<form method="POST" id="delete-form" action='/delete'>
+    {% csrf_token %}
+    <input name='item_id' type="hidden" id="delete-form-id">
+</form>
+
+
+{% endblock pageContent %} {% block pageScripts %}
+{% endblock pageScripts %}

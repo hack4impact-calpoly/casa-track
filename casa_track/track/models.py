@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.timezone import now as djnow
+
 
 # Create your models here.
 
@@ -34,6 +36,7 @@ class TrackingForm(models.Model):
    face_advocate_sv_hours = models.CharField(max_length=256, blank=False)
    phone_advocate_sv = models.CharField(max_length=256, blank=False)
    other_volunteering = models.CharField(max_length=256, blank=False)
+   created_at = models.DateTimeField(default=djnow)
    objects = models.Manager()
 
    def __str__(self):

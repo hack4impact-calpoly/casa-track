@@ -7,13 +7,18 @@
             <table class="table" id="table_id">
                 <thead class="thead-dark">
                     <tr>
+                       <th scope="col">Advocate Name</th>
                         <th scope="col">Child Name</th>
+                        <th scope="col">Date Created</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for t_form in t_forms %}
                     <tr class="table-row">
+                       <td></td>
                         <td>{{ t_form.child_name }}</td>
+                        <td>{{ t_form.created_at }}</td>
                         <td>
                             <a href="javascript:void(0)" request-id='{{ t_form.id }}' class="btn btn-danger delete-btn">
                                 <i class="material-icons">delete</i> Delete
@@ -24,13 +29,11 @@
                 </tbody>
             </table>
         </div>
-        {% if admin %}
         <div class="table-buttons">
             <a class="btn" href="/tracking/" id='add-btn'>
                 <i class="material-icons">add</i> Add New Tracking Form
             </a>
         </div>
-        {% endif %}
     </div>
 </div>
 

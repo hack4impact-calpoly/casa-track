@@ -26,7 +26,7 @@ class TrackingForm(models.Model):
       User, on_delete=models.CASCADE, blank=True, null=True)
    advocate = models.CharField(max_length=256, blank=False)
    supervisor = models.CharField(
-      max_length=1, choices=SV_CHOICES, blank=False, null=False)
+      max_length=256, choices=SV_CHOICES, blank=False, null=False)
    child_name = models.CharField(max_length=256, blank=False)
    month = models.CharField(max_length=256, blank=False)
    hours_spent = models.CharField(max_length=256, blank=False)

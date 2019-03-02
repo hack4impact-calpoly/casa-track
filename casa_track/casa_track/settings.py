@@ -27,6 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'h4icptest@gmail.com'
+EMAIL_HOST_PASSWORD = 'h4icasa2019'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 # Application definition
 

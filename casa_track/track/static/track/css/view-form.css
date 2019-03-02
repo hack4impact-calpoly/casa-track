@@ -1,0 +1,7 @@
+p.form-control:read-only {
+    background-image: none;
+}
+
+p.form-control {
+    background-image: none;
+}

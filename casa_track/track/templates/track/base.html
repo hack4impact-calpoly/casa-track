@@ -11,9 +11,11 @@
     <title>
         CASA Track
     </title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+        name='viewport' />
     <!--     Fonts and icons     -->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
     <link href="{% static 'track/css/material-kit.css' %}" rel="stylesheet" />
@@ -30,7 +32,8 @@
                     <img class="logo-main" href="/" src="{% static 'track/img/slocasa_logo.jpg' %}" />
                     <h2 class="h2-main">CASA Track</h2>
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="navbar-toggler-icon"></span>
                     <span class="navbar-toggler-icon"></span>
@@ -65,7 +68,10 @@
 <script>
     $(document).ready(function () {
         //init DateTimePickers
-        materialKit.initFormExtendedDatetimepickers();
+        //materialKit.initFormExtendedDatetimepickers();
+        $('.datetimepicker').datetimepicker({
+            format: 'DD/MM/YYYY'
+        });
     });
 </script>
 {% block pageScripts %}{% endblock pageScripts %}

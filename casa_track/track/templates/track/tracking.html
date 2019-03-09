@@ -14,56 +14,56 @@
             <div class="form-group">
                <h3 class="label-control">Supervisor</h3>
                <select name='supervisor' class="form-control" id="exampleFormControlSelect1">
-                  <option value='C'>Celena</option>
-                  <option value='H'>Heidi</option>
-                  <option value='G'>Gail</option>
-                  <option value='K'>Katie</option>
-                  <option value='P'>Pete</option>
-                  <option value='M'>Melanie</option>
-                  <option value='N'>Nicole</option>
+                  <option value='C'>Celena Zupko</option>
+                  <option value='H'>Heidi Turbow</option>
+                  <option value='G'>Gail Wechsler</option>
+                  <option value='K'>Katie Robinson</option>
+                  <option value='P'>Pete Skarda</option>
+                  <option value='M'>Melanie Barket</option>
+                  <option value='N'>Nicole Perotti</option>
                </select>
             </div>
          </div>
          <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">Advocate's Name</h3>
-               <input name='advocate' type="text" class="form-control" value="">
+               <input name='advocate' type="text" class="form-control" value="" required>
             </div>
          </div>
          <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">Child's Name</h3>
-               <input name='child_name' type="text" class="form-control" value="">
+               <input name='child_name' type="text" class="form-control" value="" required>
             </div>
          </div>
          <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">Month, Year</h3>
-               <input name='month' type="text" class="form-control" id='month'>
+               <input name='month' type="text" class="form-control" id='month' required>
             </div>
          </div>
          <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">How many hours did you spend with your CASA child/ren this month?</h3>
-               <input name='hours_spent' type="text" class="form-control" value="">
+               <input name='hours_spent' type="text" class="form-control" value="" required>
             </div>
          </div>
          <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">How many hours did you spend on this child/ren's education this month?</h3>
-               <input name='hours_education' type="text" class="form-control" id="hours_education" value="">
+               <input name='hours_education' type="text" class="form-control" id="hours_education" value="" required>
             </div>
          </div>
          <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">How many additional hours did you spend on your case this month?</h3>
-               <input name='hours_on_case' type="text" class="form-control" id="hours_on_case" value="">
+               <input name='hours_on_case' type="text" class="form-control" id="hours_on_case" value="" required>
             </div>
          </div>
          <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">What continuing education did you do this month?</h3>
-               <input name='continuing_edu' type="text" class="form-control" id="continuing_edu" value="">
+               <input name='continuing_edu' type="text" class="form-control" id="continuing_edu" value="" required>
             </div>
          </div>
          <div class="col-12">
@@ -76,26 +76,29 @@
             <div class="form-group">
                <h3 class="label-control">Did you have a face-to-face meeting with your Advocate Supervisor this month?
                   (State in hours)</h3>
-               <input name='face_advocate_sv_hours' type="text" class="form-control" id="face_advocate_sv_hours" value="">
+               <input name='face_advocate_sv_hours' type="text" class="form-control" id="face_advocate_sv_hours"
+                  value="" required>
             </div>
          </div>
          <div class="col-12">
             <div class="form-group">
-               <h3 class="label-control">Did you have phone or email contact with your Advocate Supervisor this month?</h3>
-               <input name='phone_advocate_sv' type="text" class="form-control" id="phone_advocate_sv" value="">
+               <h3 class="label-control">Did you have phone or email contact with your Advocate Supervisor this month?
+               </h3>
+               <input name='phone_advocate_sv' type="text" class="form-control" id="phone_advocate_sv" value="" required>
             </div>
          </div>
          <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">Other volunteering for CASA this month?</h3>
-               <input name='other_volunteering' type="text" class="form-control" id="other_volunteering" value="">
+               <input name='other_volunteering' type="text" class="form-control" id="other_volunteering" value="" required>
             </div>
          </div>
          <br>
          <div class="col-12">
             <div class="form-group">
-               <h3 class="label-control">Signature</h3>
-               {{ form.signature }}
+               <h3 class="label-control">Signature (Full Name) and Date</h3>
+               <input name='signature' type="text" id="signature" value="">
+               <input name='signature_date' class="datetimepicker" id="signature_date" value="" required>
             </div>
          </div>
          <br>

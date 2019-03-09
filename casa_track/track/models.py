@@ -14,13 +14,13 @@ class TrackingForm(models.Model):
    MELANIE = 'M'
    NICOLE = 'N'
    SV_CHOICES = [
-      (CELENA, 'Celena'),
-      (HEIDI, 'Heidi'),
-      (GAIL, 'Gail'),
-      (KATIE, 'Katie'),
-      (PETE, 'Pete'),
-      (MELANIE, 'Melanie'),
-      (NICOLE, 'Nicole'),
+      (CELENA, 'Celena Zupko'),
+      (HEIDI, 'Heidi Turbow'),
+      (GAIL, 'Gail Wechsler'),
+      (KATIE, 'Katie Robinson'),
+      (PETE, 'Pete Skarda'),
+      (MELANIE, 'Melanie Barket'),
+      (NICOLE, 'Nicole Perotti'),
    ]
    owner = models.ForeignKey(
       User, on_delete=models.CASCADE, blank=True, null=True)
@@ -34,9 +34,13 @@ class TrackingForm(models.Model):
    hours_on_case = models.CharField(max_length=256, blank=False)
    continuing_edu = models.CharField(max_length=256, blank=False)
    miles_driven = models.CharField(max_length=256, blank=False)
+   # yes/no field
    face_advocate_sv_hours = models.CharField(max_length=256, blank=False)
+   #yes/no field
    phone_advocate_sv = models.CharField(max_length=256, blank=False)
    other_volunteering = models.CharField(max_length=256, blank=False)
+   signature = models.CharField(max_length=256, blank=False)
+   signature_date = models.DateTimeField(default=djnow)
    created_at = models.DateTimeField(default=djnow)
    objects = models.Manager()
 

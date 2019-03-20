@@ -10,7 +10,6 @@
                        <th scope="col">Advocate Name</th>
                         <th scope="col">Child Name</th>
                         <th scope="col">Date Created</th>
-                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,11 +18,6 @@
                        <td>{{ t_form.advocate }}</td>
                         <td>{{ t_form.child_name }}</td>
                         <td>{{ t_form.created_at }}</td>
-                        <td>
-                            <a href="javascript:void(0)" request-id='{{ t_form.id }}' class="btn btn-danger delete-btn">
-                                <i class="material-icons">delete</i> Delete
-                            </a>
-                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

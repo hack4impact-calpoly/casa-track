@@ -228,7 +228,6 @@ def get_html_message2(form):  # all form data passed
                         <p style="text-align:center;">Miles Driven: """ + form.cleaned_data['miles_driven'] + """</p>
                         <p style="text-align:center;">Face-to-face Hours: """ + form.cleaned_data['face_advocate_sv_hours'] + """</p>
                         <p style="text-align:center;">Phone: """ + form.cleaned_data['phone_advocate_sv'] + """</p>
-                        <p style="text-align:center;">Other volunteering: """ + form.cleaned_data['other_volunteering'] + """</p>
                         
                       </td>
                     </tr>

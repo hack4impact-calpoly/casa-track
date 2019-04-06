@@ -41,7 +41,7 @@ def tracking(request):
                 send_mail(subject, message, from_email, [
                           super_email], html_message=html_message, fail_silently=False)
             except:
-                return HttpResponse("Didn't work.")
+                return HttpResponse("Tracking form submitted.")
             return redirect('/')
         else:
             print(form.errors)

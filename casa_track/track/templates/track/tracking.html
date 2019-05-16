@@ -1,14 +1,14 @@
 {% extends 'track/base.html' %}{% load static %} {% block pageContent %}
 <div class="section">
    <div class="container">
-      <div class="row">
+      <!-- <div class="row">
          <a class="btn btn-info" href="/">
             <i class="material-icons">arrow_back</i> Go Back
          </a>
-      </div>
-      <h2 class="h2-home">Tracking Form</h2>
+      </div> -->
+      <h2 class="h2-home">Submit a Tracking Form</h2>
       <br>
-      <form method="POST" action='/tracking/' class="post-form">
+      <form method="POST" action='/' class="post-form">
          {% csrf_token %}
          <div class="col-12">
             <div class="form-group">
@@ -96,9 +96,15 @@
          <br>
          <div class="col-12">
             <div class="form-group">
-               <h3 class="label-control">Signature (Full Name) and Date</h3>
-               <input name='signature' type="text" id="signature" value="">
-               <input name='signature_date' class="datetimepicker" id="signature_date" value="" required>
+               <h3 class="label-control">Signature and Date</h3>
+               <input type="hidden" id="signature_URL" name="esignature">
+               <canvas id='canvas_signature' height="160px" width="800px"></canvas>
+               <div>
+                  <button type="button" id="signature_undo">Undo</button>
+                  <button type="button" id="signature_clear">Clear</button>
+                  <input name='signature_date' class="datetimepicker" id="signature_date" placeholder="Pick Date" required>
+                  <!-- should the date auto fill? -->
+               </div>
             </div>
          </div>
          <br>
@@ -116,5 +122,34 @@
 {% endblock pageContent %} {% block pageScripts %}
 <script src="{% static 'track/js/plugins/bootstrap-datetimepicker.js' %}" type="text/javascript"></script>
 <script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.1.3/dist/bootstrap-validate.js"></script>
+
+<!-- signature pad js -->
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+
+<script>
+var canvas = document.getElementById('canvas_signature');
+canvas.style.backgroundColor = "white";
+var signaturePad = new SignaturePad(canvas);
+
+document.querySelector('form').addEventListener('submit', e => {
+   // encodes signature into URI blob
+   console.log(signaturePad.toDataURL());
+   document.getElementById('signature_URL').value = signaturePad.toDataURL();
+});
+
+document.getElementById('signature_clear').addEventListener('click', function () {
+   signaturePad.clear();
+});
+
+document.getElementById('signature_undo').addEventListener('click', function () {
+   var data = signaturePad.toData();
+   if (data) {
+      data.pop(); // remove the last dot or line
+      signaturePad.fromData(data);
+   }
+});
+
+document.getElementById('signature_date').datepicker('setDate', new Date());
+</script>
 
 {% endblock pageScripts %}

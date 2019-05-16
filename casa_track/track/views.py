@@ -4,7 +4,7 @@ from .models import TrackingForm
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidden, HttpResponseNotAllowed
 from django.conf import settings
-from django.core.mail import send_mail, BadHeaderError
+from django.core.mail import send_mail, BadHeaderError, EmailMessage
 # Create your views here.
 
 
@@ -36,12 +36,11 @@ def tracking(request):
             subject = "[CASA Track] New Tracking Form from " + advocate
             from_email = settings.EMAIL_HOST_USER
             message = form.cleaned_data['supervisor']
-            html_message = get_html_message2(form)
-            try:
-                send_mail(subject, message, from_email, [
+            html_message = get_html_message(form)
+            
+            send_mail(subject, message, from_email, [
                           super_email], html_message=html_message, fail_silently=False)
-            except:
-                return HttpResponse("Tracking form submitted.")
+            
             return redirect('/')
         else:
             print(form.errors)
@@ -50,69 +49,10 @@ def tracking(request):
     return render(request, 'track/tracking.html', {'form': form})
 
 
-"""
-    <h2 class="h2-home">Tracking Form</h2>
-            <h3 class="label-control">Supervisor</h3>
-            <p name='supervisor' class="form-control" id="exampleFormControlSelect1">{{ t_form.supervisor }}</p>
-            <h3 class="label-control">Child's Name</h3>
-            <p name='child_name' class="form-control" value="">{{ t_form.child_name }}</p>
-            <h3 class="label-control">Month, Year</h3>
-            <p name='month' class="form-control" id='month'>{{ t_form.month }}</p>
-            <h3 class="label-control">How many hours did you spend with your CASA child/ren this month?</h3>
-            <p name='hours_spent' class="form-control" value="">{{ t_form.hours_spent }}</p>
-            <h3 class="label-control">How many hours did you spend on this child/ren's education this month?</h3>
-            <p name='hours_education' class="form-control" id="hours_education" value="">{{ t_form.hours_education }}</p>
-            <h3 class="label-control">How many additional hours did you spend on your case this month?</h3>
-            <p name='hours_on_case' class="form-control" id="hours_on_case" value="">{{ t_form.continuing_edu }}</p>
-            <h3 class="label-control">What continuing education did you do this month?</h3>
-            <p name='continuing_edu' class="form-control" id="continuing_edu" value="">{{ t_form.miles_driven }}</p>
-        <div class="form-group">
-            <h3 class="label-control">How many miles did you drive for CASA activities this month?</h3>
-            <p name='miles_driven' class="form-control" id="miles_driven" value="">{{ t_form.face_advocate_sv_hours }}</p>
-            <h3 class="label-control">Did you have a face-to-face meeting with your Advocate Supervisor this month?
-                (State in hours)</h3>
-            <p name='face_advocate_sv_hours' class="form-control" id="face_advocate_sv_hours" value="">{{ t_form.phone_advocate_sv }}</p>
-            <h3 class="label-control">Did you have phone or email contact with your Advocate Supervisor this month?
-            <p name='phone_advocate_sv' class="form-control" id="phone_advocate_sv" value="">{{ t_form.other_volunteering }}</p>
-            <h3 class="label-control">Other volunteering for CASA this month?</h3>
-            <p name='other_volunteering' class="form-control" id="other_volunteering" value="">{{ t_form.created_at }}</p>
-    <div class="col-12">
-        <div class="form-group">
-            <h3 class="label-control">Signature</h3>
-            {{ form.signature }}
-"""
-
+def makePdf():
+  pass
 
 def get_html_message(form):  # all form data passed
-    return """<head>
-            <style>
-                p {
-                    color: black;
-                    font-weight: bold;
-                }
-                span {
-                    color: black;
-                    font-weight: normal;
-                }
-            </style>
-        </head>
-        <body>
-        <h2>Form from CASA Track</h2>
-        <p>Supervisor: <span>""" + dict(form.fields['supervisor'].choices)[form.cleaned_data['supervisor']] + """</span></p>
-        <p>Your Name: """ + form.cleaned_data['advocate'] + """</p>
-        <p>Child's Name: """ + form.cleaned_data['child_name'] + """</p>
-        <p>Month, Year: """ + form.cleaned_data['month'] + """</p>
-        <p>Hours Spent: """ + form.cleaned_data['hours_education'] + """</p>
-        <p>Additional Hours Spent on Case: """ + form.cleaned_data['hours_on_case'] + """</p>
-        <p>Continuing Education: """ + form.cleaned_data['continuing_edu'] + """</p>
-        <p>Miles Driven: """ + form.cleaned_data['miles_driven'] + """</p>
-        <p>Face-to-face Hours: """ + form.cleaned_data['face_advocate_sv_hours'] + """</p>
-        <p>Phone: """ + form.cleaned_data['phone_advocate_sv'] + """</p>
-        <p>Other volunteering: """ + form.cleaned_data['other_volunteering'] + """</p>
-        </body>"""
-
-
-def get_html_message2(form):  # all form data passed
     return """<html>
   <head>
     <meta name="viewport" content="width=device-width">
@@ -196,6 +136,15 @@ def get_html_message2(form):  # all form data passed
         background-color: #34495e !important;
         border-color: #34495e !important;
       }
+
+      #esig {
+        background:
+          url(""" + form.cleaned_data['esignature'] + """)
+          no-repeat
+          left center;
+        width: 200px;
+        height: 80px;
+      }
     }
     </style>
   </head>
@@ -228,8 +177,7 @@ def get_html_message2(form):  # all form data passed
                         <p style="text-align:center;">Miles Driven: """ + form.cleaned_data['miles_driven'] + """</p>
                         <p style="text-align:center;">Face-to-face Hours: """ + form.cleaned_data['face_advocate_sv_hours'] + """</p>
                         <p style="text-align:center;">Phone: """ + form.cleaned_data['phone_advocate_sv'] + """</p>
-                        
-                      </td>
+                        </td>
                     </tr>
                   </table>
                 </td>

@@ -39,7 +39,9 @@ class TrackingForm(models.Model):
    #yes/no field
    phone_advocate_sv = models.CharField(max_length=256, blank=False)
    other_volunteering = models.CharField(max_length=256, blank=False)
-   signature = models.CharField(max_length=256, blank=False)
+   
+   esignature = models.TextField(blank=True)
+
    signature_date = models.DateTimeField(default=djnow)
    created_at = models.DateTimeField(default=djnow)
    objects = models.Manager()

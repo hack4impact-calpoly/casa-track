@@ -5,8 +5,9 @@ from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidden, HttpResponseNotAllowed
 from django.conf import settings
 from django.core.mail import send_mail, BadHeaderError, EmailMessage
-# Create your views here.
 
+from weasyprint import HTML
+# from django.template.loader import render_to_string\
 
 def home(request):
     if request.user.is_superuser:
@@ -30,18 +31,21 @@ def tracking(request):
         form = TrackingFormForm(request.POST)
         if form.is_valid():
             form.save()
+
             supervisor = form.cleaned_data['supervisor']
             super_email = map_to_supervisor(supervisor)
             advocate = form.cleaned_data['advocate']
             subject = "[CASA Track] New Tracking Form from " + advocate
             from_email = settings.EMAIL_HOST_USER
-            message = form.cleaned_data['supervisor']
             html_message = get_html_message(form)
+
+            email = EmailMessage(subject, html_message, from_email, [super_email])
+            pdf_generation(request, html_message)
+            email.attach_file('mypdf.pdf')
+            email.content_subtype = "html"
+            email.send()
             
-            send_mail(subject, message, from_email, [
-                          super_email], html_message=html_message, fail_silently=False)
-            
-            return redirect('/')
+            return redirect('/') # submitted :D page
         else:
             print(form.errors)
     else:
@@ -49,9 +53,15 @@ def tracking(request):
     return render(request, 'track/tracking.html', {'form': form})
 
 
-def makePdf():
-  pass
+def pdf_generation(request, html_source):
 
+    # TODO make this a template
+    # paragraphs = ['first paragraph', 'second paragraph', 'third paragraph']
+    # html_string = render_to_string('track/pdf.html', {'paragraphs': paragraphs})
+    HTML(string=html_source).write_pdf(target='mypdf.pdf')
+
+
+# TODO make this a template
 def get_html_message(form):  # all form data passed
     return """<html>
   <head>
@@ -136,15 +146,6 @@ def get_html_message(form):  # all form data passed
         background-color: #34495e !important;
         border-color: #34495e !important;
       }
-
-      #esig {
-        background:
-          url(""" + form.cleaned_data['esignature'] + """)
-          no-repeat
-          left center;
-        width: 200px;
-        height: 80px;
-      }
     }
     </style>
   </head>
@@ -177,6 +178,7 @@ def get_html_message(form):  # all form data passed
                         <p style="text-align:center;">Miles Driven: """ + form.cleaned_data['miles_driven'] + """</p>
                         <p style="text-align:center;">Face-to-face Hours: """ + form.cleaned_data['face_advocate_sv_hours'] + """</p>
                         <p style="text-align:center;">Phone: """ + form.cleaned_data['phone_advocate_sv'] + """</p>
+                        <img src='""" + form.cleaned_data['esignature'] + """' style='width: 500px;'>
                         </td>
                     </tr>
                   </table>

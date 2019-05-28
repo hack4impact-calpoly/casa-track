@@ -1,0 +1,90 @@
+<html>
+
+<head>
+    <title>SLO CASA Tracking Form</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            font-size: 16px;
+            line-height: 5px;
+            margin: 40px;
+        }
+
+        .header {
+            margin: 30px;
+            text-align: center;
+        }
+
+        .line {
+            width: 80%;
+            height: 1px;
+            margin: 28px auto;
+            background-color: black;
+        }
+
+        .topic>p:first-child {
+            margin: 28px 0 0 0;
+            font-weight: bold;
+        }
+
+        .topic > p {
+            margin: 16px 20px;
+        }
+
+        #signature > * {
+            margin: 30px auto;
+            display: block;
+            width: 500px;
+        }
+
+        #signature > img {
+            height: 100px;
+        }
+
+        #signature > p {
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <h3 class="header">CASA Tracking Form</h3>
+    <h2>{{ form.advocate }}</h2>
+    <p>Supervisor: {{ form.supervisor }}</p>
+    <p>Child: {{ form.child_name }}</p>
+    <p>{{ form.month }}</p>
+    <div class="line"></div>
+    <div class="topic">
+        <p>Hours</p>
+        <p>Spent with child: {{ form.hours_spent }}</p>
+        <p>Spent on education: {{ form.hours_education }}</p>
+        <p>Additional hours: {{ form.hours_on_case }}</p>
+    </div>
+
+    <div class="topic">
+        <p>Miscellaneous</p>
+        <p>Miles driven: {{ form.miles_driven }}</p>
+        <p>Continuing education: {{ form.continuing_edu }}</p>
+    </div>
+
+    <div class="topic">
+        <p>Supervisor</p>
+        <p>Phone or email contact: {{ form.phone_advocate_sv }}</p>
+        <p>Face-to-face meeting: {{ form.face_advocate_sv_hours }}</p>
+    </div>
+
+    <div class="topic">
+        <p>Outside Volutneering</p>
+        <p>CASA related: {{ form.casa_volunteering }}</p>
+        <p>Other volutneering: {{ form.other_volunteering }}</p>
+    </div>
+
+    <div id="signature">
+        <img src="{{ form.esignature }}">
+        <p>{{ form.signature_date }}</p>
+    </div>
+
+    <h5 class="header">Powered by Hack4Impact - Cal Poly</h5>
+</body>
+
+</html>

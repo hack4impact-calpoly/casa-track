@@ -36,7 +36,7 @@ class TrackingForm(models.Model):
    face_advocate_sv_hours = models.CharField(max_length=256, blank=False)
    #yes/no field
    phone_advocate_sv = models.CharField(max_length=256, blank=False)
-   casa_volunteering = models.CharField(max_length=256, blank=False)
+   casa_volunteering = models.CharField(max_length=256, blank=False, default=djnow)
    other_volunteering = models.CharField(max_length=256, blank=False)
    
    esignature = models.TextField(blank=True)

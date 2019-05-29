@@ -15,14 +15,14 @@
             text-align: center;
         }
 
-        .line {
+        .break {
             width: 80%;
             height: 1px;
             margin: 28px auto;
             background-color: black;
         }
 
-        .topic>p:first-child {
+        .topic > p:first-child {
             margin: 28px 0 0 0;
             font-weight: bold;
         }
@@ -44,6 +44,17 @@
         #signature > p {
             text-align: right;
         }
+
+        .super_sig {
+            margin: 160px 28px 30px 28px;
+        }
+
+        .line {
+            width: 100%;
+            height: 1px;
+            margin: 14px auto;
+            background-color: black;
+        }
     </style>
 </head>
 
@@ -53,7 +64,7 @@
     <p>Supervisor: {{ form.supervisor }}</p>
     <p>Child: {{ form.child_name }}</p>
     <p>{{ form.month }}</p>
-    <div class="line"></div>
+    <div class="break"></div>
     <div class="topic">
         <p>Hours</p>
         <p>Spent with child: {{ form.hours_spent }}</p>
@@ -83,6 +94,14 @@
         <img src="{{ form.esignature }}">
         <p>{{ form.signature_date }}</p>
     </div>
+    
+    
+    <div class="super_sig">
+        <div class="line"></div>
+        Supervisor signature
+    </div>
+    
+
 
     <h5 class="header">Powered by Hack4Impact - Cal Poly</h5>
 </body>

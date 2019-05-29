@@ -1,11 +1,6 @@
 {% extends 'track/base.html' %}{% load static %} {% block pageContent %}
 <div class="section">
    <div class="container">
-      <!-- <div class="row">
-         <a class="btn btn-info" href="/">
-            <i class="material-icons">arrow_back</i> Go Back
-         </a>
-      </div> -->
       <h2 class="h2-home">Submit a Tracking Form</h2>
       <br>
       <form method="POST" action='/' class="post-form">
@@ -13,7 +8,8 @@
          <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">Supervisor</h3>
-               <select name='supervisor' class="form-control" id="exampleFormControlSelect1">
+               <select name='supervisor' class="form-control">
+                  <option value="" selected disabled hidden>Choose your supervisor</option>
                   <option value='C'>Celena Zupko</option>
                   <option value='H'>Heidi Turbow</option>
                   <option value='G'>Gail Wechsler</option>
@@ -39,25 +35,25 @@
          <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">Month, Year</h3>
-               <input name='month' type="text" class="form-control" id='month' required>
+               <input name='month' class="datetimepicker_month" id="month" placeholder="Pick Month" required>
             </div>
          </div>
          <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">How many hours did you spend with your CASA child/ren this month?</h3>
-               <input name='hours_spent' type="text" class="form-control" value="" required>
+               <input name='hours_spent' type="number" class="form-control" value="" required>
             </div>
          </div>
          <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">How many hours did you spend on this child/ren's education this month?</h3>
-               <input name='hours_education' type="text" class="form-control" id="hours_education" value="" required>
+               <input name='hours_education' type="number" class="form-control" id="hours_education" value="" required>
             </div>
          </div>
          <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">How many additional hours did you spend on your case this month?</h3>
-               <input name='hours_on_case' type="text" class="form-control" id="hours_on_case" value="" required>
+               <input name='hours_on_case' type="number" class="form-control" id="hours_on_case" value="" required>
             </div>
          </div>
          <div class="col-12">
@@ -69,14 +65,14 @@
          <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">How many miles did you drive for CASA activities this month?</h3>
-               <input name='miles_driven' type="text" class="form-control" id="miles_driven" value="" required>
+               <input name='miles_driven' type="number" class="form-control" id="miles_driven" value="" required>
             </div>
          </div>
          <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">Did you have a face-to-face meeting with your Advocate Supervisor this month?
                   (State in hours)</h3>
-               <input name='face_advocate_sv_hours' type="text" class="form-control" id="face_advocate_sv_hours"
+               <input name='face_advocate_sv_hours' type="number" class="form-control" id="face_advocate_sv_hours"
                   value="" required>
             </div>
          </div>
@@ -84,15 +80,24 @@
             <div class="form-group">
                <h3 class="label-control">Did you have phone or email contact with your Advocate Supervisor this month?
                </h3>
-               <input name='phone_advocate_sv' type="text" class="form-control" id="phone_advocate_sv" value="" required>
+               <input name='phone_advocate_sv' type="text" class="form-control" id="phone_advocate_sv" value=""
+                  required>
             </div>
          </div>
          <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">Other volunteering for CASA this month?</h3>
-               <input name='other_volunteering' type="text" class="form-control" id="other_volunteering" value="" required>
+               <input name='casa_volunteering' type="text" class="form-control" id="casa_volunteering" value=""
+                  required>
             </div>
          </div>
+         <div class="col-12">
+               <div class="form-group">
+                  <h3 class="label-control">Other volunteering outside of CASA this month?</h3>
+                  <input name='other_volunteering' type="text" class="form-control" id="other_volunteering" value=""
+                     required>
+               </div>
+            </div>
          <br>
          <div class="col-12">
             <div class="form-group">
@@ -102,7 +107,8 @@
                <div>
                   <button type="button" id="signature_undo">Undo</button>
                   <button type="button" id="signature_clear">Clear</button>
-                  <input name='signature_date' class="datetimepicker" id="signature_date" placeholder="Pick Date" required>
+                  <input name='signature_date' class="datetimepicker" id="signature_date" placeholder="Pick Date"
+                     required>
                   <!-- should the date auto fill? -->
                </div>
             </div>
@@ -127,29 +133,28 @@
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 
 <script>
-var canvas = document.getElementById('canvas_signature');
-canvas.style.backgroundColor = "white";
-var signaturePad = new SignaturePad(canvas);
+   var canvas = document.getElementById('canvas_signature');
+   canvas.style.backgroundColor = "white";
+   var signaturePad = new SignaturePad(canvas);
 
-document.querySelector('form').addEventListener('submit', e => {
-   // encodes signature into URI blob
-   console.log(signaturePad.toDataURL());
-   document.getElementById('signature_URL').value = signaturePad.toDataURL();
-});
+   document.querySelector('form').addEventListener('submit', e => {
+      // encodes signature into URI blob
+      document.getElementById('signature_URL').value = signaturePad.toDataURL();
+   });
 
-document.getElementById('signature_clear').addEventListener('click', function () {
-   signaturePad.clear();
-});
+   document.getElementById('signature_clear').addEventListener('click', function () {
+      signaturePad.clear();
+   });
 
-document.getElementById('signature_undo').addEventListener('click', function () {
-   var data = signaturePad.toData();
-   if (data) {
-      data.pop(); // remove the last dot or line
-      signaturePad.fromData(data);
-   }
-});
+   document.getElementById('signature_undo').addEventListener('click', function () {
+      var data = signaturePad.toData();
+      if (data) {
+         data.pop(); // remove the last dot or line
+         signaturePad.fromData(data);
+      }
+   });
 
-document.getElementById('signature_date').datepicker('setDate', new Date());
+   document.getElementById('signature_date').datepicker('setDate', new Date());
 </script>
 
 {% endblock pageScripts %}

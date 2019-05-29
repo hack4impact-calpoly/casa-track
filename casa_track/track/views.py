@@ -46,7 +46,7 @@ def tracking(request):
             email = EmailMessage(subject, html_message,
                                  from_email, [super_email])
             pdf_generation(request, form.cleaned_data)
-            email.attach_file('mypdf.pdf')
+            email.attach_file('report.pdf')
             email.content_subtype = "html"
             email.send()
 

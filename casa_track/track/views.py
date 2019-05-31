@@ -60,7 +60,7 @@ def tracking(request):
 
 def pdf_generation(request, form_info):
     html_string = render_to_string('track/pdf-output.html', {'form': form_info})
-    HTML(string=html_string).write_pdf(target='report.pdf')
+    HTML(string=html_string, base_url=request.build_absolute_uri()).write_pdf(target='report.pdf')
 
 
 def map_to_supervisor(supervisor_char):

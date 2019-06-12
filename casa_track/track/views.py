@@ -10,6 +10,8 @@ from weasyprint import HTML
 from django.template.loader import render_to_string
 from datetime import datetime
 
+from django.contrib.auth.models import User
+
 
 def home(request):
     if request.user.is_superuser:
@@ -27,19 +29,20 @@ def home(request):
 
 
 def tracking(request):
+    users = User.objects.all()
     if request.method == "POST":
         form = TrackingFormForm(request.POST)
         if form.is_valid():
+            print("Valid!")
             form.save()
-            
-
             supervisor = form.cleaned_data['supervisor']
-            super_email = map_to_supervisor(supervisor)
+            super_email = 'h4icptest@gmail.com'
             advocate = form.cleaned_data['advocate']
             subject = "[CASA Track] New Tracking Form from " + advocate
             from_email = settings.EMAIL_HOST_USER
 
-            form.cleaned_data['supervisor'] = dict(form.fields['supervisor'].choices)[supervisor]
+            form.cleaned_data['supervisor'] = form.cleaned_data['supervisor']
+            #dict(form.fields['supervisor'].choices)[supervisor]
             form.cleaned_data['signature_date'] = form.cleaned_data['signature_date'].strftime("%d %b %Y")
             html_message = render_to_string('track/email-output.html', {'form': form.cleaned_data})
 
@@ -55,7 +58,10 @@ def tracking(request):
             print(form.errors)
     else:
         form = TrackingFormForm()
-    return render(request, 'track/tracking.html', {'form': form})
+    return render(request, 'track/tracking.html', {
+        'form': form, 
+        'users': users,
+        })
 
 
 def pdf_generation(request, form_info):

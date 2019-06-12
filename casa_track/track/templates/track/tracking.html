@@ -8,15 +8,19 @@
          <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">Supervisor</h3>
+               
                <select name='supervisor' class="form-control">
                   <option value="" selected disabled hidden>Choose your supervisor</option>
-                  <option value='C'>Celena Zupko</option>
+                  {% for user in users %}
+                  <option name='supervisor'>{{user.get_full_name}}</option>
+                  {% endfor %}
+                  <!-- <option value='C'>Celena Zupko</option>
                   <option value='H'>Heidi Turbow</option>
                   <option value='G'>Gail Wechsler</option>
                   <option value='K'>Katie Robinson</option>
                   <option value='P'>Pete Skarda</option>
                   <option value='M'>Melanie Barket</option>
-                  <option value='N'>Nicole Perotti</option>
+                  <option value='N'>Nicole Perotti</option> -->
                </select>
             </div>
          </div>

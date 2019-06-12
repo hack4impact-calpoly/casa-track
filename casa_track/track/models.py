@@ -6,25 +6,9 @@ from django.utils.timezone import now as djnow
 # Create your models here.
 
 class TrackingForm(models.Model):
-   CELENA = 'C'
-   HEIDI = 'H'
-   GAIL = 'G'
-   KATIE = 'K'
-   PETE = 'P'
-   MELANIE = 'M'
-   NICOLE = 'N'
-   SV_CHOICES = [
-      (CELENA, 'Celena Zupko'),
-      (HEIDI, 'Heidi Turbow'),
-      (GAIL, 'Gail Wechsler'),
-      (KATIE, 'Katie Robinson'),
-      (PETE, 'Pete Skarda'),
-      (MELANIE, 'Melanie Barket'),
-      (NICOLE, 'Nicole Perotti'),
-   ]
    owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
    advocate = models.CharField(max_length=256, blank=False)
-   supervisor = models.CharField(max_length=256, choices=SV_CHOICES, blank=False, null=False)
+   supervisor = models.CharField(max_length=256, blank=False, null=False)
    child_name = models.CharField(max_length=256, blank=False)
    month = models.CharField(max_length=256, blank=False) # doesn't like being a DateTimeField
    hours_spent = models.PositiveSmallIntegerField(blank=False)

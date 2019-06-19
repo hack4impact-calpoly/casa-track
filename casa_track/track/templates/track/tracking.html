@@ -12,15 +12,10 @@
                <select name='supervisor' class="form-control">
                   <option value="" selected disabled hidden>Choose your supervisor</option>
                   {% for user in users %}
-                  <option name='supervisor'>{{user.get_full_name}}</option>
+                  {% if user.is_active == True %}
+                  <option value='{{user.username}}'>{{user.get_full_name}}</option>
+                  {% endif %}
                   {% endfor %}
-                  <!-- <option value='C'>Celena Zupko</option>
-                  <option value='H'>Heidi Turbow</option>
-                  <option value='G'>Gail Wechsler</option>
-                  <option value='K'>Katie Robinson</option>
-                  <option value='P'>Pete Skarda</option>
-                  <option value='M'>Melanie Barket</option>
-                  <option value='N'>Nicole Perotti</option> -->
                </select>
             </div>
          </div>
@@ -28,6 +23,12 @@
             <div class="form-group">
                <h3 class="label-control">Advocate's Name</h3>
                <input name='advocate' type="text" class="form-control" value="" required>
+            </div>
+         </div>
+         <div class="col-12">
+            <div class="form-group">
+               <h3 class="label-control">Advocate's Email</h3>
+               <input name='advocate_email' type="email" class="form-control" value="" required>
             </div>
          </div>
          <div class="col-12">
@@ -158,7 +159,7 @@
       }
    });
 
-   document.getElementById('signature_date').datepicker('setDate', new Date());
+   document.getElementById('signature_date').value = new Date().toLocaleDateString("en-US");
 </script>
 
 {% endblock pageScripts %}

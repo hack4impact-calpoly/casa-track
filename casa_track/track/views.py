@@ -33,27 +33,33 @@ def tracking(request):
     if request.method == "POST":
         form = TrackingFormForm(request.POST)
         if form.is_valid():
-            print("Valid!")
             form.save()
-            supervisor = form.cleaned_data['supervisor']
-            super_email = 'h4icptest@gmail.com'
-            advocate = form.cleaned_data['advocate']
-            subject = "[CASA Track] New Tracking Form from " + advocate
+            
+            super_email = map_to_supervisor(form.cleaned_data['supervisor'])
             from_email = settings.EMAIL_HOST_USER
-
-            form.cleaned_data['supervisor'] = form.cleaned_data['supervisor']
-            #dict(form.fields['supervisor'].choices)[supervisor]
+            advocate = form.cleaned_data['advocate']
             form.cleaned_data['signature_date'] = form.cleaned_data['signature_date'].strftime("%d %b %Y")
-            html_message = render_to_string('track/email-output.html', {'form': form.cleaned_data})
 
-            email = EmailMessage(subject, html_message,
+            # SUPERVISOR EMAIL
+            subject = "[CASA Track] New Tracking Form from " + advocate
+
+            email = EmailMessage(subject, 'A new tracking form has been received.',
                                  from_email, [super_email])
             pdf_generation(request, form.cleaned_data)
             email.attach_file('report.pdf')
+            email.send()
+
+            # ADVOCATE EMAIL
+            advocate_email = form.cleaned_data['advocate_email']
+            html_message = render_to_string('track/email-output.html', {'form': form.cleaned_data})
+
+            subject = "CASA - Tracking Form Receipt"
+
+            email = EmailMessage(subject, html_message, from_email, [advocate_email])
             email.content_subtype = "html"
             email.send()
 
-            return redirect('/') # TODO send user to a "submitted" page
+            return redirect('success/') # TODO send user to a "submitted" page
         else:
             print(form.errors)
     else:
@@ -69,21 +75,11 @@ def pdf_generation(request, form_info):
     HTML(string=html_string, base_url=request.build_absolute_uri()).write_pdf(target='report.pdf')
 
 
-def map_to_supervisor(supervisor_char):
-    if supervisor_char == 'C':
-        return 'h4icptest@gmail.com'
-    if supervisor_char == 'H':
-        return 'h4icptest@gmail.com'
-    if supervisor_char == 'G':
-        return 'h4icptest@gmail.com'
-    if supervisor_char == 'K':
-        return 'h4icptest@gmail.com'
-    if supervisor_char == 'P':
-        return 'h4icptest@gmail.com'
-    if supervisor_char == 'M':
-        return 'h4icptest@gmail.com'
-    if supervisor_char == 'N':
-        return 'h4icptest@gmail.com'
+def map_to_supervisor(supervisor_username):
+    users = User.objects.all()
+    for user in users:
+        if str(user) == str(supervisor_username):
+            return user.email
 
 
 def delete_form(request):
@@ -98,3 +94,7 @@ def delete_form(request):
             return HttpResponseForbidden()
     else:
         return HttpResponseNotAllowed(request)
+
+def success(request):
+    print("YAY")
+    return render(request, 'track/success.html')

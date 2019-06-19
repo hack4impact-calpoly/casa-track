@@ -8,6 +8,7 @@ from django.utils.timezone import now as djnow
 class TrackingForm(models.Model):
    owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
    advocate = models.CharField(max_length=256, blank=False)
+   advocate_email = models.EmailField(max_length=254, blank=False)
    supervisor = models.CharField(max_length=256, blank=False, null=False)
    child_name = models.CharField(max_length=256, blank=False)
    month = models.CharField(max_length=256, blank=False) # doesn't like being a DateTimeField

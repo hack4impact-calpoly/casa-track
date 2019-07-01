@@ -28,19 +28,19 @@
     <div class="topic">
         <p>Miscellaneous</p>
         <p>Miles driven: {{ form.miles_driven }}</p>
-        <p>Continuing education: {{ form.continuing_edu }}</p>
+        <p class="multiline">Continuing education: {{ form.continuing_edu }}</p>
     </div>
 
     <div class="topic">
         <p>Supervisor</p>
-        <p>Phone or email contact: {{ form.phone_advocate_sv }}</p>
+        <p class="multiline">Phone or email contact: {{ form.phone_advocate_sv }}</p>
         <p>Face-to-face meeting: {{ form.face_advocate_sv_hours }}</p>
     </div>
 
     <div class="topic">
         <p>Outside Volutneering</p>
-        <p>CASA related: {{ form.casa_volunteering }}</p>
-        <p>Other volutneering: {{ form.other_volunteering }}</p>
+        <p class="multiline">CASA related: {{ form.casa_volunteering }}</p>
+        <p class="multiline">Other volutneering: {{ form.other_volunteering }}</p>
     </div>
 
     <div id="signature">

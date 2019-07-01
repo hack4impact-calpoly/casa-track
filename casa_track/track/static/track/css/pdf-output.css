@@ -5,6 +5,10 @@ body {
     margin: 40px;
 }
 
+.multiline {
+    line-height: 18px;
+}
+
 .header {
     margin-bottom: 60px;
 }

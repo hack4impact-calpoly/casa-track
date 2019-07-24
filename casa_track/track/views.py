@@ -6,8 +6,12 @@ from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidde
 from django.conf import settings
 from django.core.mail import send_mail, BadHeaderError, EmailMessage
 
-from weasyprint import HTML
+from weasyprint import HTML, CSS
+import os.path
+from os import path
 from django.template.loader import render_to_string
+from django.contrib.staticfiles.templatetags.staticfiles import static
+
 from datetime import datetime
 
 from django.contrib.auth.models import User
@@ -59,7 +63,7 @@ def tracking(request):
             email.content_subtype = "html"
             email.send()
 
-            return redirect('success/') # TODO send user to a "submitted" page
+            return redirect('success/')
         else:
             print(form.errors)
     else:
@@ -72,7 +76,8 @@ def tracking(request):
 
 def pdf_generation(request, form_info):
     html_string = render_to_string('track/pdf-output.html', {'form': form_info})
-    HTML(string=html_string, base_url=request.build_absolute_uri()).write_pdf(target='report.pdf')
+    html = HTML(string=html_string, base_url=request.build_absolute_uri())
+    html.write_pdf(target='report.pdf')
 
 
 def map_to_supervisor(supervisor_username):

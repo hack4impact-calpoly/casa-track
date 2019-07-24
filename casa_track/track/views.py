@@ -6,11 +6,8 @@ from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidde
 from django.conf import settings
 from django.core.mail import send_mail, BadHeaderError, EmailMessage
 
-from weasyprint import HTML, CSS
-import os.path
-from os import path
+from weasyprint import HTML
 from django.template.loader import render_to_string
-from django.contrib.staticfiles.templatetags.staticfiles import static
 
 from datetime import datetime
 

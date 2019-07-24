@@ -3,58 +3,155 @@
 <html>
 
 <head>
-    <title>SLO CASA Tracking Form</title>
-    <link href="{% static 'track/css/pdf-output.css' %}" rel="stylesheet" />
+    <style>
+        @charset "UTF-8";
+
+        @page {
+            font-family: sans-serif;
+            font-size: 16px;
+            size: auto;
+            margin: 3cm;
+
+            @top-center {
+                content: 'CASA Tracking Form';
+                font-size: 16pt;
+                font-weight: bold;
+            }
+
+            @top-left {
+                padding-top: 20px;
+                background-image: url("{% static '/track/img/slocasa_logo.jpg' %}");
+                content: '';
+                background-size: 150px 80px;
+                width: 150px;
+                height: 60px;
+
+            }
+
+            @bottom-center {
+                content: 'Powered by Hack4Impact - Cal Poly';
+                font-size: 9pt;
+            }
+        }
+
+
+
+        body {
+            line-height: 5px;
+        }
+
+        .multiline {
+            line-height: 16px;
+        }
+
+        .left {
+            width: 150px;
+        }
+
+        .break {
+            width: 80%;
+            height: 1px;
+            margin: 28px auto;
+            background-color: black;
+        }
+
+        .topic>p:first-child {
+            margin: 28px 0 0 0;
+            font-weight: bold;
+        }
+
+        .topic>p {
+            margin: 16px 20px;
+        }
+
+        .line {
+            width: 100%;
+            height: 1px;
+            margin: 14px auto;
+            background-color: black;
+        }
+
+        .content {
+            height: 630px;
+            vertical-align: top;
+        }
+
+        .advocate_sig {
+            height: 100px;
+            text-align: center;
+        }
+
+        .advocate_sig > img {
+            height: 80px;
+            margin: 0 auto;
+        }
+
+        .advocate_sig > p{
+            text-align: right;
+        }
+
+        .super_sig {
+            height: 100px;
+            vertical-align: bottom;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="header">
-        <img src="{% static '/track/img/slocasa_logo.jpg' %}" />
-        <h3>CASA Tracking Form</h3>
-    </div>
+    <table style="margin: 0; width: 100%">
+        <tr>
+            <td class="content">
+                <h2>{{ form.advocate }}</h2>
+                <p>Supervisor: {{ form.supervisor }}</p>
+                <p>Child: {{ form.child_name }}</p>
+                <p>{{ form.month }}</p>
+                <div class="break"></div>
+                <div class="topic">
+                    <p>Hours</p>
+                    <p>Spent with child: {{ form.hours_spent }}</p>
+                    <p>Spent on education: {{ form.hours_education }}</p>
+                    <p>Additional hours: {{ form.hours_on_case }}</p>
+                </div>
 
-    <h2>{{ form.advocate }}</h2>
-    <p>Supervisor: {{ form.supervisor }}</p>
-    <p>Child: {{ form.child_name }}</p>
-    <p>{{ form.month }}</p>
-    <div class="break"></div>
-    <div class="topic">
-        <p>Hours</p>
-        <p>Spent with child: {{ form.hours_spent }}</p>
-        <p>Spent on education: {{ form.hours_education }}</p>
-        <p>Additional hours: {{ form.hours_on_case }}</p>
-    </div>
+                <div class="topic">
+                    <p>Miscellaneous</p>
+                    <p>Miles driven: {{ form.miles_driven }}</p>
+                    <p class="multiline">Continuing education: {{ form.continuing_edu }}</p>
+                </div>
 
-    <div class="topic">
-        <p>Miscellaneous</p>
-        <p>Miles driven: {{ form.miles_driven }}</p>
-        <p class="multiline">Continuing education: {{ form.continuing_edu }}</p>
-    </div>
+                <div class="topic">
+                    <p>Supervisor</p>
+                    <p class="multiline">Phone or email contact: {{ form.phone_advocate_sv }}</p>
+                    <p>Face-to-face meeting: {{ form.face_advocate_sv_hours }}</p>
+                </div>
 
-    <div class="topic">
-        <p>Supervisor</p>
-        <p class="multiline">Phone or email contact: {{ form.phone_advocate_sv }}</p>
-        <p>Face-to-face meeting: {{ form.face_advocate_sv_hours }}</p>
-    </div>
+                <div class="topic">
+                    <p>Outside Volutneering</p>
+                    <p class="multiline">CASA related: {{ form.casa_volunteering }}</p>
+                    <p class="multiline">Other volutneering: {{ form.other_volunteering }}</p>
+                </div>
 
-    <div class="topic">
-        <p>Outside Volutneering</p>
-        <p class="multiline">CASA related: {{ form.casa_volunteering }}</p>
-        <p class="multiline">Other volutneering: {{ form.other_volunteering }}</p>
-    </div>
+                <div id="signature">
+                </div>
 
-    <div id="signature">
-        <img src="{{ form.esignature }}">
-        <p>{{ form.signature_date }}</p>
-    </div>
-    
-    
-    <div class="super_sig">
-        <div class="line"></div>
-        Supervisor signature
-    </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="advocate_sig">
+                <img src="{{ form.esignature }}">
+                <p>{{ form.signature_date }}</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="super_sig">
+                    <div class="line"></div>
+                    Supervisor signature
+                </div>
+            </td>
+        </tr>
 
-    <h5 class="footer">Powered by Hack4Impact - Cal Poly</h5>
+    </table>
+
 </body>
 
 </html>

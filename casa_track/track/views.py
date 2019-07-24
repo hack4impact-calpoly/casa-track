@@ -81,7 +81,7 @@ def map_to_supervisor(supervisor_username):
     users = User.objects.all()
     for user in users:
         if str(user) == str(supervisor_username):
-            return user.email
+            return 'eric@hack4impact.org' #user.email
 
 
 def delete_form(request):

@@ -1,1 +1,1 @@
-web: gunicorn casa_track.wsgi
+web: gunicorn casa_track.wsgi --log-file

@@ -26,12 +26,13 @@ TEMPLATES_PATH = os.path.join(PROJECT_PATH, "templates")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'd#*ge+1=y1s2ifx4n^4z2)9v2blhv0y%)mjv!(&9pwii54o@ra'
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'd#*ge+1=y1s2ifx4n^4z2)9v2blhv0y%)mjv!(&9pwii54o@ra')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
+# DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'casa-track.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'casa-track.herokuapp.com', 'staging-casa-track.herokuapp.com']
 
 DEFAULT_FROM_EMAIL = 'h4icptest@gmail.com'
 SERVER_EMAIL = 'h4icptest@gmail.com'
@@ -59,6 +60,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # ADD WHITENOISE MIDDLEWARE
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -98,6 +100,13 @@ DATABASES = {
     }
 }
 
+# Heroku: Update database configuration from $DATABASE_URL.
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
+
+
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
@@ -134,9 +143,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+# The absolute path to the directory where collectstatic will collect static files for deployment.
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# The URL to use when referring to static files (where they will be served from)
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # HEROKU STUFF:
 django_heroku.settings(locals())

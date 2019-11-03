@@ -46,21 +46,31 @@
          <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">How many hours did you spend with your CASA child/ren this month?</h3>
-               <input name='hours_spent' type="number" class="form-control" value="" required>
+               <input name='hours_spent' type="number" step="0.01" class="form-control" value="" required>
             </div>
          </div>
          <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">How many hours did you spend on this child/ren's education this month?</h3>
-               <input name='hours_education' type="number" class="form-control" id="hours_education" value="" required>
+               <input name='hours_education' type="number"  step="0.01" class="form-control" id="hours_education" value="" required>
             </div>
          </div>
          <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">How many additional hours did you spend on your case this month?</h3>
-               <input name='hours_on_case' type="number" class="form-control" id="hours_on_case" value="" required>
+               <input name='hours_on_case' type="number" step="0.01" class="form-control" id="hours_on_case" value="" required>
             </div>
          </div>
+         <div class="col-12">
+               <div class="form-group">
+                  <h3 class="label-control">Did you read <i>The Voice</i>?</h3>
+                  <select name='the_voice' class="form-control">
+                     <option value="" selected disabled hidden>Yes or No</option>
+                     <option value="Yes" type="text">Yes</option>
+                     <option value="No" type="text">No</option>
+                  </select>
+               </div>
+            </div>
          <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">What continuing education did you do this month?</h3>
@@ -71,23 +81,28 @@
          <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">How many miles did you drive for CASA activities this month?</h3>
-               <input name='miles_driven' type="number" class="form-control" id="miles_driven" value="" required>
+               <input name='miles_driven' type="number" step="0.01" class="form-control" id="miles_driven" value="" required>
             </div>
          </div>
          <div class="col-12">
             <div class="form-group">
-               <h3 class="label-control">Did you have a face-to-face meeting with your Advocate Supervisor this month?
-                  (State in hours)</h3>
-               <input name='face_advocate_sv_hours' type="number" class="form-control" id="face_advocate_sv_hours"
-                  value="" required>
+               <h3 class="label-control">Did you have a face-to-face meeting with your Advocate Supervisor this month?</h3>
+               <select name='face_advocate_sv_hours' class="form-control">
+                  <option value="" selected disabled hidden>Yes or No</option>
+                  <option value="Yes" type="text">Yes</option>
+                  <option value="No" type="text">No</option>
+               </select>
             </div>
          </div>
          <div class="col-12">
             <div class="form-group">
                <h3 class="label-control">Did you have phone or email contact with your Advocate Supervisor this month?
                </h3>
-               <input name='phone_advocate_sv' type="text" class="form-control" id="phone_advocate_sv" value=""
-                  required>
+               <select name='phone_advocate_sv' class="form-control">
+                     <option value="" selected disabled hidden>Yes or No</option>
+                     <option value="Yes" type="text">Yes</option>
+                     <option value="No" type="text">No</option>
+               </select>
             </div>
          </div>
          <div class="col-12">

@@ -12,15 +12,17 @@ class TrackingForm(models.Model):
    supervisor = models.CharField(max_length=256, blank=False, null=False)
    child_name = models.CharField(max_length=256, blank=False)
    month = models.CharField(max_length=256, blank=False) # doesn't like being a DateTimeField
-   hours_spent = models.PositiveSmallIntegerField(blank=False)
-   hours_education = models.PositiveSmallIntegerField(blank=False)
-   hours_on_case = models.PositiveSmallIntegerField(blank=False)
+   hours_spent = models.FloatField(blank=False)
+   hours_education = models.FloatField(blank=False)
+   hours_on_case = models.FloatField(blank=False)
+   # the voice
+   the_voice = models.CharField(max_length=256, blank=False, null=False)
    continuing_edu = models.CharField(max_length=256, blank=False)
-   miles_driven = models.PositiveSmallIntegerField(blank=False)
+   miles_driven = models.FloatField(blank=False)
    # yes/no field
-   face_advocate_sv_hours = models.CharField(max_length=256, blank=False)
+   face_advocate_sv_hours = models.CharField(max_length=256, blank=False, null=False)
    #yes/no field
-   phone_advocate_sv = models.CharField(max_length=256, blank=False)
+   phone_advocate_sv = models.CharField(max_length=256, blank=False, null=False)
    casa_volunteering = models.CharField(max_length=256, blank=False, default=djnow)
    other_volunteering = models.CharField(max_length=256, blank=False)
    

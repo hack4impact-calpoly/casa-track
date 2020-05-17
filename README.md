@@ -1,10 +1,6 @@
 # CASA-Track
 A form tracking Django application for CASA of San Luis Obispo.
 
-## Project Purpose
-
-## Environment
-
 ## Django Overview
 
 ### The MVT Framework

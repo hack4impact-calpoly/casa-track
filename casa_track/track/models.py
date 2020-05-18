@@ -28,9 +28,12 @@ class TrackingForm(models.Model):
    
    esignature = models.TextField(blank=True)
 
-   signature_date = models.DateTimeField(default=djnow)
+   signature_date = models.DateTimeField(default=djnow, blank=True)
    created_at = models.DateTimeField(default=djnow)
    objects = models.Manager()
 
+   # NEW
+   supervisor_signature = models.TextField(blank=True)
+   supervisor_signature_date = models.DateTimeField(default=djnow, blank=True)
    def __str__(self):
       return self.child_name

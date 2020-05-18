@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'track',
     'jsignature',
+    'crispy_forms',
+
 ]
 
 MIDDLEWARE = [

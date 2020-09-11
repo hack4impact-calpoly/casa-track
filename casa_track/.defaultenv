@@ -1,0 +1,7 @@
+# use https://djecrety.ir/ or an equivalent
+SECRET_KEY = ''
+DEBUG = True
+PROD = False
+
+EMAIL_ADDR = ''
+EMAIL_PW = ''

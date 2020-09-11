@@ -11,8 +11,10 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-# HEROKU STUFF:
-#import django_heroku
+import django_heroku
+import dj_database_url
+from decouple import config
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -24,24 +26,20 @@ TEMPLATES_PATH = os.path.join(PROJECT_PATH, "templates")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'd#*ge+1=y1s2ifx4n^4z2)9v2blhv0y%)mjv!(&9pwii54o@ra'
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'd#*ge+1=y1s2ifx4n^4z2)9v2blhv0y%)mjv!(&9pwii54o@ra')
+SECRET_KEY = config('SECRET_KEY', default=os.environ.get('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
-DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'casa-track.herokuapp.com', 'staging-casa-track.herokuapp.com']
 
-DEFAULT_FROM_EMAIL = 'h4icptest@gmail.com'
-SERVER_EMAIL = 'h4icptest@gmail.com'
+DEFAULT_FROM_EMAIL = config('EMAIL_ADDR')
+SERVER_EMAIL = config('EMAIL_ADDR')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'h4icptest@gmail.com'
-# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_HOST_PASSWORD = 'ozgxustbnyimabnq'
+EMAIL_HOST_USER = config('EMAIL_ADDR')
+EMAIL_HOST_PASSWORD = config('EMAIL_PW')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
@@ -55,8 +53,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'track',
-    'jsignature',
-    'crispy_forms',
 
 ]
 
@@ -103,7 +99,6 @@ DATABASES = {
 }
 
 # Heroku: Update database configuration from $DATABASE_URL.
-import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
@@ -156,4 +151,5 @@ STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # HEROKU STUFF:
-#django_heroku.settings(locals())
+if config('PROD', default=True, cast=bool):
+    django_heroku.settings(locals())
